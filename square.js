@@ -12,6 +12,9 @@ const Square = function() {
     Math.random(),
     Math.random()
   );
+  this.wDir = 1;
+  this.hDir = 1;
+  this.dDir = 1;
   this.cube = new THREE.Mesh(geometry, material);
   this.cube.position.x = Math.random() * WIDTH - WIDTH / 2;
   this.cube.position.y = Math.random() * HEIGHT - HEIGHT / 2;
@@ -39,5 +42,17 @@ Square.prototype.update = function() {
   this.cube.rotation.x += 0.01;
   this.cube.rotation.y += 0.01;
   this.cube.rotation.z += 0.01;
+  this.cube.scale.x += this.wDir * 0.01;
+  this.cube.scale.y += this.hDir * 0.01;
+  this.cube.scale.z += this.dDir * 0.01;
+  if(this.cube.scale.x > 2 || this.cube.scale.x < 0) {
+    this.wDir *= -1;
+  }
+  if(this.cube.scale.y > 2 || this.cube.scale.y < 0) {
+    this.hDir *= -1;
+  }
+  if(this.cube.scale.z > 2 || this.cube.scale.z < 0) {
+    this.dDir *= -1;
+  }
   this.cube.verticesNeedUpdate = true;
 };

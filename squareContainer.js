@@ -1,5 +1,5 @@
 const SquareContainer = function() {
-  this.maxSquares = 100;
+  this.maxSquares = 110;
   this.squares = [];
   this.group = new THREE.Group();
 
