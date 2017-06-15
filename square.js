@@ -4,22 +4,33 @@ const Square = function() {
     Math.random() * 50,
     Math.random() * 50
   );
-  const material = new THREE.MeshLambertMaterial({
+  material = new THREE.MeshLambertMaterial({
     color: new THREE.Color(Math.random(), Math.random(), Math.random())
   });
+  const a = 5;
   this.velocity = new THREE.Vector3(
-    Math.random(),
-    Math.random(),
-    Math.random()
+    Math.random() * a - a,
+    Math.random() * a - a,
+    Math.random() * a - a
   );
+  this.mass = 1;
+  this.acceleration = new THREE.Vector3();
   this.wDir = 1;
   this.hDir = 1;
   this.dDir = 1;
   this.cube = new THREE.Mesh(geometry, material);
   this.cube.position.x = Math.random() * WIDTH - WIDTH / 2;
   this.cube.position.y = Math.random() * HEIGHT - HEIGHT / 2;
+  this.cube.position.z = Math.random() * 100 - 100 / 2;
   this.cube.rotation.x = Math.random() * 2 * Math.PI;
   this.cube.rotation.y = Math.random() * 2 * Math.PI;
+  this.updated = false;
+}
+
+Square.prototype.applyForce = function(force) {
+  let f = Object.assign({}, force);
+  f.divideScalar(this.mass);
+  this.acceleration.add(f);
 }
 
 Square.prototype.checkConstraints = function() {
@@ -36,23 +47,13 @@ Square.prototype.checkConstraints = function() {
   }
 };
 
-Square.prototype.update = function() {
-  this.checkConstraints();
+Square.prototype.update = function(cb) {
+  this.checkConstraints(cb);
+  this.velocity.add(this.acceleration);
   this.cube.position.add(this.velocity);
+  this.acceleration.multiplyScalar(0);
   this.cube.rotation.x += 0.01;
   this.cube.rotation.y += 0.01;
   this.cube.rotation.z += 0.01;
-  this.cube.scale.x += this.wDir * 0.01;
-  this.cube.scale.y += this.hDir * 0.01;
-  this.cube.scale.z += this.dDir * 0.01;
-  if(this.cube.scale.x > 2 || this.cube.scale.x < 0) {
-    this.wDir *= -1;
-  }
-  if(this.cube.scale.y > 2 || this.cube.scale.y < 0) {
-    this.hDir *= -1;
-  }
-  if(this.cube.scale.z > 2 || this.cube.scale.z < 0) {
-    this.dDir *= -1;
-  }
   this.cube.verticesNeedUpdate = true;
 };

@@ -1,5 +1,5 @@
 const SquareContainer = function() {
-  this.maxSquares = 110;
+  this.maxSquares = 10;
   this.squares = [];
   this.group = new THREE.Group();
 
@@ -11,6 +11,7 @@ const SquareContainer = function() {
 }
 
 SquareContainer.prototype.update = function() {
+  const _this = this;
   this.squares.forEach(function(sq) {
     sq.update();
   });
