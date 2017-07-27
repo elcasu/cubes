@@ -1,4 +1,4 @@
-const Square = function() {
+const Square = function(vInit) {
   const geometry = new THREE.BoxGeometry(
     Math.random() * 50,
     Math.random() * 50,
@@ -8,12 +8,17 @@ const Square = function() {
     color: new THREE.Color(Math.random(), Math.random(), Math.random())
   });
   const a = 1;
-  this.velocity = new THREE.Vector3(0, 1, 0)
+  //this.velocity = new THREE.Vector3(0, 5, 0)
   //this.velocity = new THREE.Vector3(
   //  Math.random() * a - a,
   //  Math.random() * a - a,
   //  Math.random() * a - a
   //);
+  this.velocity = new THREE.Vector3(
+    vInit.x || 0,
+    vInit.y || 0,
+    vInit.z || 0
+  );
   this.mass = 1;
   this.acceleration = new THREE.Vector3();
   this.wDir = 1;

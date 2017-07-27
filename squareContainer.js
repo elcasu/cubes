@@ -5,7 +5,7 @@ const SquareContainer = function() {
   this.atractor = new Atractor(0, 0, -1000);
 
   for(let i = 0; i < this.maxSquares; i++) {
-    const sq = new Square();
+    const sq = new Square(new THREE.Vector3(0, 5, 0));
     this.squares.push(sq);
     this.group.add(sq.cube)
   }
