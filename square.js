@@ -7,12 +7,13 @@ const Square = function() {
   material = new THREE.MeshLambertMaterial({
     color: new THREE.Color(Math.random(), Math.random(), Math.random())
   });
-  const a = 5;
-  this.velocity = new THREE.Vector3(
-    Math.random() * a - a,
-    Math.random() * a - a,
-    Math.random() * a - a
-  );
+  const a = 1;
+  this.velocity = new THREE.Vector3(0, 1, 0)
+  //this.velocity = new THREE.Vector3(
+  //  Math.random() * a - a,
+  //  Math.random() * a - a,
+  //  Math.random() * a - a
+  //);
   this.mass = 1;
   this.acceleration = new THREE.Vector3();
   this.wDir = 1;
@@ -28,9 +29,8 @@ const Square = function() {
 }
 
 Square.prototype.applyForce = function(force) {
-  let f = Object.assign({}, force);
-  f.divideScalar(this.mass);
-  this.acceleration.add(f);
+  force.divideScalar(this.mass);
+  this.acceleration.add(force);
 }
 
 Square.prototype.checkConstraints = function() {
@@ -48,7 +48,7 @@ Square.prototype.checkConstraints = function() {
 };
 
 Square.prototype.update = function(cb) {
-  this.checkConstraints(cb);
+  //this.checkConstraints();
   this.velocity.add(this.acceleration);
   this.cube.position.add(this.velocity);
   this.acceleration.multiplyScalar(0);

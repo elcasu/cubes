@@ -21,13 +21,18 @@ container.appendChild(renderer.domElement);
 const pointLight = new THREE.PointLight(0xFFFFFF);
 pointLight.position.x = 100;
 pointLight.position.y = 50;
-pointLight.position.z = 130;
+pointLight.position.z = 530;
 scene.add(pointLight);
 
 squareContainer = new SquareContainer();
 scene.add(squareContainer.group)
 
 window.scene = scene
+
+window.addEventListener('click', function(e) {
+  e.preventDefault();
+  squareContainer.expand(e.clientX, e.clientY)
+})
 
 function render() {
   renderer.render(scene, camera);
