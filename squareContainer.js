@@ -1,11 +1,12 @@
 const SquareContainer = function() {
+  this.position = new THREE.Vector3(0, 0, -1000)
   this.maxSquares = 500;
   this.squares = [];
   this.group = new THREE.Group();
-  this.atractor = new Atractor(0, 0, -1000);
+  this.atractor = new Atractor(this.position);
 
   for(let i = 0; i < this.maxSquares; i++) {
-    const sq = new Square(new THREE.Vector3(0, 5, 0));
+    const sq = new Square(new THREE.Vector3(5, 0, 0));
     this.squares.push(sq);
     this.group.add(sq.cube)
   }
@@ -25,23 +26,3 @@ SquareContainer.prototype.update = function() {
     }
   });
 }
-
-SquareContainer.prototype.expand = function(x, y) {
-  const md = 100
-  this.squares.forEach(function(sq) {
-    let normF = new THREE.Vector3(Math.random(), Math.random(), Math.random())
-    normF.normalize()
-    let d = normF.distanceTo(sq.cube.position)
-
-    sq.applyForce(new THREE.Vector3(
-      normF.x * d / md,
-      normF.y * d / md,
-      normF.z * d / md
-    ))
-  })
-}
-/*
- * m - 1
- * d - x
- * x = d / m
- */

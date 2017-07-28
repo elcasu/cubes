@@ -1,5 +1,5 @@
-const Atractor = function(x, y, z) {
-  this.position = new THREE.Vector3(x, y, z)
+const Atractor = function(position) {
+  this.position = position || new THREE.Vector3(0, 0, 0)
   this.defaultStrength = 0.1
 }
 

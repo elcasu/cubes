@@ -8,12 +8,6 @@ const Square = function(vInit) {
     color: new THREE.Color(Math.random(), Math.random(), Math.random())
   });
   const a = 1;
-  //this.velocity = new THREE.Vector3(0, 5, 0)
-  //this.velocity = new THREE.Vector3(
-  //  Math.random() * a - a,
-  //  Math.random() * a - a,
-  //  Math.random() * a - a
-  //);
   this.velocity = new THREE.Vector3(
     vInit.x || 0,
     vInit.y || 0,

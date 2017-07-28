@@ -29,15 +29,22 @@ scene.add(squareContainer.group)
 
 window.scene = scene
 
-window.addEventListener('click', function(e) {
-  e.preventDefault();
-  squareContainer.expand(e.clientX, e.clientY)
-})
+let cont = 0
+let cameraDir = 1
+const maxCameraY = 5000
 
 function render() {
+  if(cont >= 1000) {
+    camera.position.y += cameraDir
+  }
+  if(camera.position.y > maxCameraY || camera.position.y < -maxCameraY) {
+    cameraDir *= -1
+  }
+  camera.lookAt(squareContainer.position)
   renderer.render(scene, camera);
   squareContainer.update();
   requestAnimationFrame(render);
+  cont++
 }
 
 render();
