@@ -1,6 +1,6 @@
 const SquareContainer = function() {
-  this.position = new THREE.Vector3(0, 0, -1000)
-  this.maxSquares = 500;
+  this.position = new THREE.Vector3(0, 0, -5000)
+  this.maxSquares = 1500;
   this.squares = [];
   this.group = new THREE.Group();
   this.atractor = new Atractor(this.position);

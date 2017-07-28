@@ -4,7 +4,7 @@ const HEIGHT = window.innerHeight;
 const VIEW_ANGLE = 45
 const ASPECT = WIDTH / HEIGHT
 const NEAR = 0.1
-const FAR = 10000;
+const FAR = 1000000;
 const RADIUS = 30;
 
 const container = document.querySelector('#container')
@@ -38,7 +38,7 @@ function render() {
     camera.position.y += cameraDir
   }
   if(camera.position.y > maxCameraY || camera.position.y < -maxCameraY) {
-    cameraDir *= -1
+    cameraDir = 0
   }
   camera.lookAt(squareContainer.position)
   renderer.render(scene, camera);
